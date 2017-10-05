@@ -16,6 +16,16 @@
           :view :game)))
 
 (rf/reg-event-db
+ :play-another-round
+ (fn [db [_]]
+   (update db :game game/new-round)))
+
+(rf/reg-event-db
+ :start-over
+ (fn [db [_]]
+   db/default-db))
+
+(rf/reg-event-db
  :take-card
  (fn [db [_]]
    (update db :game game/turn :take-card)))

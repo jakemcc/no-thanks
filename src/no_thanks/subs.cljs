@@ -13,7 +13,6 @@
  (fn [db]
    (:view db)))
 
-
 (re-frame/reg-sub
  :top-card
  (fn [db]

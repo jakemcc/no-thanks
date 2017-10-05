@@ -22,6 +22,13 @@
      :current-player 0
      :players (vec (repeat number-players {:tokens starting-tokens :cards []}))}))
 
+(defn new-round [game]
+  (let [next-game (initialize (count (:players game)))]
+    (update next-game :players
+            (fn [new-players]
+              (vec (for [[old-player new-player] (map vector (:players game) new-players)]
+                     (update new-player :total-score (fnil + 0) (score-player old-player))))))))
+
 (defn draw-card [game]
   (-> game
       (update :shown-card (first (:draw-pile game)))
