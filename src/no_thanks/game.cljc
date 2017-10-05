@@ -27,7 +27,6 @@
       (update :shown-card (first (:draw-pile game)))
       (update :draw-pile (rest (:draw-pile game)))))
 
-
 (defn turn [game action]
   (if (= action :take-card)
     (-> game
@@ -39,3 +38,6 @@
         (update :current-player (comp #(rem % (count (:players game))) inc))
         (update :token-pot inc)
         (update-in [:players (:current-player game) :tokens] dec))))
+
+(def game-over? (comp empty? :draw-pile))
+

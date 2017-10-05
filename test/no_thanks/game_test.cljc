@@ -63,4 +63,14 @@
                            :players [{:tokens 10 :cards []}
                                      {:tokens 9 :cards []}]}
                           :pass)]
-      (is (= 0 (:current-player game))))))
+      (is (= 0 (:current-player game)))))
+
+  (testing "Player takes card with zero tokens on it"
+    (let [game (game/turn {:draw-pile [8 1 10]
+                           :token-pot 0
+                           :current-player 0
+                           :players [{:tokens 0 :cards []}
+                                     {:tokens 0 :cards []}]}
+                          :take-card)]
+      (is (= [8] (get-in game [:players 0 :cards])))
+      (is (= 0 (get-in game [:players 0 :tokens]))))))
