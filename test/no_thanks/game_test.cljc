@@ -13,4 +13,7 @@
   (is (= 4 (game/score-player {:cards [1 3]})))
   
   (is (= 4 (game/score-player {:cards [1 3 4]})))
-  (is (= 1 (game/score-player {:cards [1 2 3]}))))
+  (is (= 1 (game/score-player {:cards [1 2 3]})))
+
+  (is (= -3 (game/score-player {:cards [1 2 3]
+                                :chips 4}))))
