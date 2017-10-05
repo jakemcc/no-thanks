@@ -26,3 +26,16 @@
   (-> game
       (update :shown-card (first (:draw-pile game)))
       (update :draw-pile (rest (:draw-pile game)))))
+
+
+(defn turn [game action]
+  (if (= action :take-card)
+    (-> game
+        (update :draw-pile rest)
+        (assoc :token-pot 0)
+        (update-in [:players (:current-player game) :tokens] + (:token-pot game))
+        (update-in [:players (:current-player game) :cards] conj (first (:draw-pile game))))
+    (-> game
+        (update :current-player (comp #(rem % (count (:players game))) inc))
+        (update :token-pot inc)
+        (update-in [:players (:current-player game) :tokens] dec))))
