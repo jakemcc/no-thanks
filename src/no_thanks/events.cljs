@@ -73,15 +73,14 @@
                        :on-failure [:firebase-error]}})))
 
 (game-event! :start-game game/new-round)
-(rf/reg-event-db
- :play-another-round
- (fn [db [_]]
-   (update db :game game/new-round)))
 
-(game-event! :take-card
-             game/turn
-             :take-card)
+(game-event! :play-another-round game/new-round)
 
-(game-event! :no-thanks!
-             game/turn
-             :no-thanks!)
+(game-event! :take-card game/turn :take-card)
+
+(game-event! :no-thanks! game/turn :no-thanks!)
+
+
+;; TODO
+;; - [ ] can rejoin game as same account
+;; - [ ] can go back to pre-game view

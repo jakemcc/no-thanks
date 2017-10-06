@@ -17,8 +17,9 @@
                (str "player " idx "'s round score: " rounds-score " total score: " (+ rounds-score (:total-score player)))]))
            [:button {:on-click #(rf/dispatch [:play-another-round])} "Play another round"]
            [:button {:on-click #(rf/dispatch [:start-over])} "Start over"]]
-    :playing [:div "No Thanks!"
-              [:br] [:br]
+    :playing [:div "No Thanks! (Playing)"
+              [:br]
+              [:br]
               [:div
                "Top card: " (listen :top-card)
                [:br]
