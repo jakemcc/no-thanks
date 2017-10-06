@@ -1,39 +1,67 @@
 (ns no-thanks.subs
-  (:require [re-frame.core :as re-frame]
-            [no-thanks.game :as game])
+  (:require [re-frame.core :as rf])
   (:require-macros [reagent.ratom :refer [reaction]]))
 
-(re-frame/reg-sub
+(rf/reg-sub
  :db
  (fn [db]
    db))
 
-(re-frame/reg-sub
+(rf/reg-sub
  :view
- (fn [db]
+ (fn [db _]
    (:view db)))
 
-(re-frame/reg-sub
+(rf/reg-sub
+ :game-code
+ (fn [db]
+   (:game-code db)))
+
+(rf/reg-sub-raw
+ :game
+ (fn [db _]
+   (reaction
+    (let [game-code @(rf/subscribe [:game-code])]
+      (if game-code
+        @(rf/subscribe [:firebase/on-value {:path [game-code]}])
+        nil)))))
+
+(rf/reg-sub
  :top-card
- (fn [db]
-   (first (get-in db [:game :draw-pile]))))
+ (fn [_ _]
+   (rf/subscribe [:game]))
+ (fn [game _]
+   (first (:draw-pile game))))
 
-(re-frame/reg-sub
+(rf/reg-sub
  :current-player
- (fn [db]
-   (get-in db [:game :current-player])))
+ (fn [_ _]
+   (rf/subscribe [:game]))
+ (fn [game _]
+   (:current-player game)))
 
-(re-frame/reg-sub
+(rf/reg-sub
  :token-pot
- (fn [db]
-   (get-in db [:game :token-pot] 0)))
+ (fn [_ _]
+   (rf/subscribe [:game]))
+ (fn [game _]
+   (:token-pot game 0)))
 
-(re-frame/reg-sub
+
+(rf/reg-sub
  :players
- (fn [db]
-   (get-in db [:game :players])))
+ (fn [_ _]
+    (rf/subscribe [:game]))
+ (fn [game _]
+   (:players game)))
 
-(re-frame/reg-sub
- :game-over
- (fn [db]
-   (game/game-over? (:game db))))
+(rf/reg-sub
+ :game-state
+ (fn [_ _]
+   (rf/subscribe [:game]))
+ (fn [game _]
+   (condp = (:game-over? game)
+     true :over
+     false :playing
+     nil :not-started)))
+

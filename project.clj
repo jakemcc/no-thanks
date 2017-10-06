@@ -1,6 +1,8 @@
 (defproject no-thanks "0.1.0-SNAPSHOT"
-  :dependencies [[org.clojure/clojure "1.8.0"]
-                 [re-frame "0.10.2-beta1"]]
+  :dependencies [[org.clojure/clojure "1.9.0-beta1"]
+                 [org.clojure/clojurescript "1.9.908"]
+                 [re-frame "0.10.2-beta1"]
+                 [com.degel/re-frame-firebase "0.2.0"]]
 
   :plugins [[lein-cljsbuild "1.1.5"]]
 
