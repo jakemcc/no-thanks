@@ -58,11 +58,6 @@
 
 
 
-(rf/reg-event-db
- :start-over
- (fn [db [_]]
-   db/default-db))
-
 (defn game-event! [event f & args]
   (rf/reg-event-fx
    event
@@ -71,6 +66,8 @@
                        :function #(apply f % args)
                        :on-success #(println (str event " success"))
                        :on-failure [:firebase-error]}})))
+
+(game-event! :start-over game/reset-and-keep-players)
 
 (game-event! :start-game game/new-round)
 
@@ -81,6 +78,3 @@
 (game-event! :no-thanks! game/turn :no-thanks!)
 
 
-;; TODO
-;; - [ ] can rejoin game as same account
-;; - [ ] can go back to pre-game view

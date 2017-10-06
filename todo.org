@@ -1,0 +1,6 @@
+* TODO
+- [ ] can rejoin game as same account
+- [X] can go back to people joining game view
+- [ ] sign out
+- [ ] Display game code in header
+  

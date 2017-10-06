@@ -32,6 +32,10 @@
                                          :total-score (+ (:total-score old-player 0) (score-player old-player))
                                          :name (:name old-player)))))))))
 
+(defn reset-and-keep-players [game]
+  {:players (mapv (fn [player] (select-keys player [:name]))
+                  (:players game))})
+
 (defn draw-card [game]
   (-> game
       (update :shown-card (first (:draw-pile game)))
