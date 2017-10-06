@@ -2,7 +2,8 @@
   (:require [cljs.pprint :as pprint]
             [re-frame.core :as rf]
             [clojure.string :as string]
-            [no-thanks.game :as game]))
+            [no-thanks.game :as game]
+            [no-thanks.config :as config]))
 
 (defn listen [query]
   @(rf/subscribe [query]))
@@ -77,5 +78,6 @@
         (if (= :no-game view)
           [no-game]
           [game]))])
-   [:pre {:class "database"}
-    (with-out-str (pprint/pprint @(rf/subscribe [:db])))]])
+   (when config/debug?
+     [:pre {:class "database"}
+      (with-out-str (pprint/pprint @(rf/subscribe [:db])))])])

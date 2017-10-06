@@ -1,10 +1,11 @@
 (defproject no-thanks "0.1.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.9.0-beta1"]
-                 [org.clojure/clojurescript "1.9.908"]
+                 [org.clojure/clojurescript "1.9.946"]
                  [re-frame "0.10.2-beta1"]
+                 [cljsjs/firebase "4.4.0-0"]
                  [com.degel/re-frame-firebase "0.2.0"]]
 
-  :plugins [[lein-cljsbuild "1.1.5"]]
+  :plugins [[lein-cljsbuild "1.1.7"]]
 
   :min-lein-version "2.5.3"
 
@@ -22,7 +23,7 @@
   :profiles
   {:dev
    {:dependencies [[binaryage/devtools "0.9.4"]
-                   [figwheel-sidecar "0.5.13"]
+                   [figwheel-sidecar "0.5.14"]
                    [com.cemerick/piggieback "0.2.2"]
                    [re-frisk "0.5.0"]]
 
@@ -49,7 +50,7 @@
      :source-paths ["src"]
      :compiler     {:main            no-thanks.core
                     :output-to       "resources/public/js/compiled/app.js"
-                    :optimizations   :advanced
+                    :optimizations   :simple
                     :closure-defines {goog.DEBUG false}
                     :pretty-print    false}}
 
