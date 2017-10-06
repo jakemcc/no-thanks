@@ -49,16 +49,22 @@
    [:form {:on-submit (fn [e]
                         (.preventDefault e)
                         (println (.. e -target -elements -game -value))
-                        (rf/dispatch [:join-game (.. e -target -elements -game -value)]))}
-    [:input {:type "text" :name "game" :required true}]
+                        (rf/dispatch [:join-game (string/upper-case (.. e -target -elements -game -value))]))}
+    [:input {:style {:text-transform :uppercase}
+             :type "text"
+             :name "game"
+             :placeholder "Enter Game Code"
+             :required true}]
     [:button {:type "submit"} "Join Game"]]
    [:br]
    [:button {:on-click #(rf/dispatch [:create-game])} "Create new game"]])
 
 (defn header []
   [:div {:style {:margin-bottom 30}}
-   (if (listen :user)
-     [:button {:on-click #(rf/dispatch [:sign-out])} "Sign Out"]
+   (when-let [code (listen :game-code)]
+     [:span {:style {:padding-right 10}} "Game code: " code])
+   (if-let [user (listen :user)]
+     [:span (:email user) [:button {:on-click #(rf/dispatch [:sign-out])} "Sign Out"]]
      [:button {:on-click #(rf/dispatch [:sign-in])} "Sign in"])])
 
 (defn main-panel []
