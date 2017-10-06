@@ -4,7 +4,8 @@
 - [X] sign out
 - [X] Display game code in header
 - [ ] A person can only take actions for themselves
+- [ ] Deploy  
 - [ ] Styling
-- [ ] Display names instead of player #
-  
+- [X] Display names instead of player #
+
   

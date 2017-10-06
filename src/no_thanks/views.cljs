@@ -26,7 +26,7 @@
                "Tokens on card: " (listen :token-pot)]
               (doall (for [[idx player] (map-indexed vector (listen :players))]
                        [:div {:key idx}
-                        [:div (str "----- player " idx " ------")]
+                        [:div (str "----- " (:name player) " ------")]
                         [:div "Cards: " (string/join ", " (sort (:cards player)))]
                         [:div "Tokens: " (:tokens player)]
                         (when (= idx (listen :current-player))
