@@ -3,9 +3,10 @@
 - [X] can go back to people joining game view
 - [X] sign out
 - [X] Display game code in header
-- [ ] A person can only take actions for themselves
+- [X] A person can only take actions for themselves
 - [ ] Deploy  
 - [ ] Styling
 - [X] Display names instead of player #
+- [ ] randomize starting player, or rotate based on game number or something  
 
   

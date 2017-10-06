@@ -29,7 +29,8 @@
                         [:div (str "----- " (:name player) " ------")]
                         [:div "Cards: " (string/join ", " (sort (:cards player)))]
                         [:div "Tokens: " (:tokens player)]
-                        (when (= idx (listen :current-player))
+                        (when (and (= idx (listen :current-player))
+                                   (= (:name player) (:email (listen :user))))
                           [:div
                            [:button {:on-click #(rf/dispatch [:take-card])} "Take card"]
                            [:button {:on-click #(rf/dispatch [:no-thanks!]) :disabled (zero? (:tokens player))} "No thanks!"]])]))]
