@@ -4,9 +4,13 @@
 - [X] sign out
 - [X] Display game code in header
 - [X] A person can only take actions for themselves
-- [ ] Deploy  
+- [X] Deploy
 - [ ] Styling
+  - [ ] Highlight player who is taking action
+  - [ ] Put active player in same spot on screen all the time
+  - [ ] Add more whitespace
+  - [ ] How's it look on phones?
 - [X] Display names instead of player #
 - [ ] randomize starting player, or rotate based on game number or something  
+- [ ] Cap game at 7 players
 
-  

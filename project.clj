@@ -27,7 +27,7 @@
                    [com.cemerick/piggieback "0.2.2"]
                    [re-frisk "0.5.0"]]
 
-    :plugins      [[lein-figwheel "0.5.13"]
+    :plugins      [[lein-figwheel "0.5.14"]
                    [lein-re-frisk "0.5.0"]
                    [lein-doo "0.1.8"]
                    [lein-pdo "0.1.1"]]}}
