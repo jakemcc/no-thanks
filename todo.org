@@ -1,6 +1,10 @@
 * TODO
-- [ ] can rejoin game as same account
+- [X] can rejoin game as same account
 - [X] can go back to people joining game view
 - [X] sign out
 - [X] Display game code in header
+- [ ] A person can only take actions for themselves
+- [ ] Styling
+- [ ] Display names instead of player #
+  
   

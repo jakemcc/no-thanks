@@ -52,7 +52,11 @@
                :game-code code
                :view :pregame)
     :firebase/swap! {:path [(keyword code) :players]
-                     :function (fn [players] (conj (vec players) {:name (get-in db [:user :email])}))
+                     :function (fn [players]
+                                 (let [user-id (get-in db [:user :email])]
+                                   (if (some (comp (partial = user-id) :name) players)
+                                     players
+                                     (conj (vec players) {:name user-id}))))
                      :on-success #(println "join game success")
                      :on-failure [:firebase-error]}}))
 
