@@ -73,15 +73,16 @@
      [:span (:email user) [:button {:class "button"
                                     :on-click #(rf/dispatch [:sign-out])}
                            "Sign Out"]]
-     [:button {:on-click #(rf/dispatch [:sign-in])
-               :class "button"}
-      "Sign in"])])
+     [:span [:button {:on-click #(rf/dispatch [:sign-in])
+                      :class "button"}
+             "Sign in"]
+      [:span {:style {:margin-left "1em"}}
+       "If you click Sign In and nothing happens, check your pop-up blocker!"]])])
 
 (defn not-signed-in []
   [:div
    [:p "Welcome to No Thanks!"]
    [:p "Sign in with a Google account by clicking above to join the game."]
-   [:p "If you click Sign In and nothing happens, check your pop-up blocker!"]
    [:p "Read the "
     [:a {:href "https://boardgamegeek.com/boardgame/12942/no-thanks"} "description"] " for the rules."]])
 
