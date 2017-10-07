@@ -25,19 +25,22 @@
                "Top card: " (listen :top-card)
                [:br]
                "Tokens on card: " (listen :token-pot)]
-              (doall (for [[idx player] (map-indexed vector (listen :players))]
-                       [:div {:key idx
-                              :class "player"}
-                        [:div (str "----- " (:name player) " ------")]
-                        [:div "Cards: " (string/join ", " (sort (:cards player)))]
-                        [:div "Tokens: " (:tokens player)]
-                        (when (and (= idx (listen :current-player))
-                                   (= (:name player) (:email (listen :user))))
-                          [:div
-                           [:button {:class "action-button" :on-click #(rf/dispatch [:take-card])}
-                            [:span "Take card"]]
-                           [:button {:class "action-button" :on-click #(rf/dispatch [:no-thanks!]) :disabled (zero? (:tokens player))}
-                            [:span "No thanks!"]]])]))]
+              (let [current-user (listen :user)]
+                (doall (for [[idx player] (map-indexed vector (listen :players))
+                             :let [is-current-user? (= (:name player) (:email current-user))]]  
+                         [:div {:key idx
+                                :class "player"}
+                          [:div (str "----- " (:name player) " ------")]
+                          [:div "Cards: " (string/join ", " (sort (:cards player)))]
+                          (when is-current-user?
+                            [:div "Tokens: " (:tokens player)])
+                          (when (and (= idx (listen :current-player))
+                                     is-current-user?)
+                            [:div
+                             [:button {:class "action-button" :on-click #(rf/dispatch [:take-card])}
+                              [:span "Take card"]]
+                             [:button {:class "action-button" :on-click #(rf/dispatch [:no-thanks!]) :disabled (zero? (:tokens player))}
+                              [:span "No thanks!"]]])])))]
     :not-started (let [players (listen :players)]
                    [:div
                     [:div "---- Players ----"
