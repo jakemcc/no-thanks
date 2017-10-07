@@ -25,7 +25,7 @@
                "Tokens on card: " (listen :token-pot)]
               (let [current-user (listen :user)]
                 (doall (for [[idx player] (map-indexed vector (listen :players))
-                             :let [is-current-user? (= (:name player) (:email current-user))]]  
+                             :let [is-current-user? (= (:name player) (:email current-user))]]
                          [:div {:key idx
                                 :class "player"}
                           [:div (str "----- " (:name player) " ------")]
@@ -71,23 +71,29 @@
      [:span {:style {:padding-right 10}} "Game code: " code])
    (if-let [user (listen :user)]
      [:span (:email user) [:button {:class "button"
-                                    :on-click #(rf/dispatch [:sign-out])} "Sign Out"]]
-     [:button {:on-click #(rf/dispatch [:sign-in])} "Sign in"])])
+                                    :on-click #(rf/dispatch [:sign-out])}
+                           "Sign Out"]]
+     [:button {:on-click #(rf/dispatch [:sign-in])
+               :class "button"}
+      "Sign in"])])
+
+(defn not-signed-in []
+  [:div
+   [:p "Welcome to No Thanks!"]
+   [:p "Sign in with a Google account by clicking above to join the game."]
+   [:p "Read the "
+    [:a {:href "https://boardgamegeek.com/boardgame/12942/no-thanks"} "description"] " for the rules."]])
 
 (defn main-panel []
   [:div
    [header]
    [:div {:class "board"}
     (if (= :not-signed-in (listen :game-state))
-      [:div
-       [:p "Welcome to No Thanks!"]
-       [:p "Sign in with a Google account by clicking above to join the game."]
-       [:p "Read the "
-        [:a {:href "https://boardgamegeek.com/boardgame/12942/no-thanks"} "description "] "for the rules."]]
+      [not-signed-in]
       (let [view (listen :view)]
         (if (= :no-game view)
           [no-game]
           [game])))]
-#_   (when config/debug?
-     [:pre {:class "database"}
-      (with-out-str (pprint/pprint @(rf/subscribe [:db])))])])
+   #_   (when config/debug?
+          [:pre {:class "database"}
+           (with-out-str (pprint/pprint @(rf/subscribe [:db])))])])
