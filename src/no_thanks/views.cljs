@@ -18,9 +18,7 @@
                (str "player " idx "'s round score: " rounds-score " total score: " (+ rounds-score (:total-score player)))]))
            [:button {:on-click #(rf/dispatch [:play-another-round])} "Play another round"]
            [:button {:on-click #(rf/dispatch [:start-over])} "Start over"]]
-    :playing [:div "No Thanks! (Playing)"
-              [:br]
-              [:br]
+    :playing [:div
               [:div
                "Top card: " (listen :top-card)
                [:br]
@@ -79,7 +77,7 @@
   [:div
    [header]
    (when (listen :user)
-     [:div 
+     [:div {:class "board"}
       (let [view (listen :view)]
         (if (= :no-game view)
           [no-game]

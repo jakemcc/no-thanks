@@ -13,11 +13,16 @@ body {
 }
 
 #app {
-  margin: 0 30px;
 }
 
 .header {
   margin-bottom: 18px;
+  padding: 0 1em;
+  border-bottom: solid 1px;
+}
+
+.board {
+  margin: 0 2em;
 }
 
 .player {
