@@ -29,6 +29,10 @@ body {
   margin: 1em 0;
 }
 
+.button {
+  cursor: pointer;
+}
+
 .action-button {
   cursor: pointer;
   position: relative;

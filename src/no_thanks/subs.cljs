@@ -58,10 +58,13 @@
 (rf/reg-sub
  :game-state
  (fn [_ _]
-   (rf/subscribe [:game]))
- (fn [game _]
-   (condp = (:game-over? game)
-     true :over
-     false :playing
-     nil :not-started)))
+   [(rf/subscribe [:game])
+    (rf/subscribe [:user])])
+ (fn [[game user] _]
+   (if (nil? user)
+     :not-signed-in
+     (condp = (:game-over? game)
+       true :over
+       false :playing
+       nil :not-started))))
 
