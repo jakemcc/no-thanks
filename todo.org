@@ -5,6 +5,7 @@
 - [X] Display game code in header
 - [X] A person can only take actions for themselves
 - [X] Deploy
+- [ ] only show your tokens  
 - [ ] Styling
   - [ ] Highlight player who is taking action
   - [ ] Put active player in same spot on screen all the time

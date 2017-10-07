@@ -1,0 +1,57 @@
+html {
+  font-size: 100%;
+}
+body {
+  max-width: 1200px;
+  postition: relative;
+  margin: 0 auto;
+  padding: 0;
+  line-height: 1.5em;
+  color: #222;
+  font-family: Georgia,"Times New Roman",serif;
+  border: 0;
+}
+
+#app {
+  margin: 0 30px;
+}
+
+.header {
+  margin-bottom: 18px;
+}
+
+.player {
+  margin: 1em 0;
+}
+
+.action-button {
+  cursor: pointer;
+  position: relative;
+
+  margin-right: 5px;
+  padding: 0;
+
+  overflow: hidden;
+
+  border-width: 0;
+  outline: none;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
+  color: white;
+  background-color: black;
+  transition: background-color .3s;
+}
+
+.action-button:hover {
+  background-color: gray;
+}
+
+.action-button > * {
+  position: relative;
+}
+
+.action-button > span {
+  display: block;
+  padding: 1em 2em;
+}

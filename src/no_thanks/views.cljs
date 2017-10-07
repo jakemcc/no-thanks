@@ -26,15 +26,18 @@
                [:br]
                "Tokens on card: " (listen :token-pot)]
               (doall (for [[idx player] (map-indexed vector (listen :players))]
-                       [:div {:key idx}
+                       [:div {:key idx
+                              :class "player"}
                         [:div (str "----- " (:name player) " ------")]
                         [:div "Cards: " (string/join ", " (sort (:cards player)))]
                         [:div "Tokens: " (:tokens player)]
                         (when (and (= idx (listen :current-player))
                                    (= (:name player) (:email (listen :user))))
                           [:div
-                           [:button {:on-click #(rf/dispatch [:take-card])} "Take card"]
-                           [:button {:on-click #(rf/dispatch [:no-thanks!]) :disabled (zero? (:tokens player))} "No thanks!"]])]))]
+                           [:button {:class "action-button" :on-click #(rf/dispatch [:take-card])}
+                            [:span "Take card"]]
+                           [:button {:class "action-button" :on-click #(rf/dispatch [:no-thanks!]) :disabled (zero? (:tokens player))}
+                            [:span "No thanks!"]]])]))]
     :not-started (let [players (listen :players)]
                    [:div
                     [:div "---- Players ----"
@@ -62,7 +65,7 @@
    [:button {:on-click #(rf/dispatch [:create-game])} "Create new game"]])
 
 (defn header []
-  [:div {:style {:margin-bottom 30}}
+  [:div {:class "header"}
    (when-let [code (listen :game-code)]
      [:span {:style {:padding-right 10}} "Game code: " code])
    (if-let [user (listen :user)]
@@ -73,11 +76,11 @@
   [:div
    [header]
    (when (listen :user)
-     [:div
+     [:div 
       (let [view (listen :view)]
         (if (= :no-game view)
           [no-game]
           [game]))])
-   (when config/debug?
+#_   (when config/debug?
      [:pre {:class "database"}
       (with-out-str (pprint/pprint @(rf/subscribe [:db])))])])
