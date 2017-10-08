@@ -31,14 +31,14 @@
                                          (drop-while (fn [[_ player]] (not= (:name player) (:email user))))
                                          (take (count players)))]
                 (doall (for [[idx player] indexed-players
-                             :let [is-current-user? (= (:name player) (:email user))]]
+                             :let [is-viewing-user? (= (:name player) (:email user))]]
                          [:div {:key idx
                                 :class "player"}
                           [:div (str "----- " (:name player) " ------")]
                           [:div "Cards: " (string/join ", " (sort (:cards player)))]
-                          (when is-current-user?
+                          (when is-viewing-user?
                             [:div "Tokens: " (:tokens player)])
-                          (when (and is-current-user?
+                          (when (and is-viewing-user?
                                      (= idx (listen :current-player)))
                             [:div
                              [:button {:class "action-button" :on-click #(rf/dispatch [:take-card])}
