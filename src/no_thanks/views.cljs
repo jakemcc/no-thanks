@@ -46,7 +46,7 @@
             (for [[idx player] (map-indexed vector (listen :players))
                   :let [rounds-score (game/score-player player)]]
               [:div {:key idx}
-               (str "player " idx "'s round score: " rounds-score " total score: " (+ rounds-score (:total-score player)))]))
+               (str (:name player) "'s round score: " rounds-score " total score: " (+ rounds-score (:total-score player)))]))
            [:button {:on-click #(rf/dispatch [:play-another-round])} "Play another round"]
            [:button {:on-click #(rf/dispatch [:start-over])} "Start over"]]
     :playing [:div
