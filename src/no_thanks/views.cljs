@@ -82,9 +82,8 @@
   [:div {:class "header"}
    (when-let [code (listen :game-code)]
      [:span {:style {:padding-right 10}} "Game code: " code])
-   (if-let [user (listen :user)]
-     [:span  {:style {:float :right}}
-      [:button {:class "button"
+   (if (listen :logged-in?)
+     [:span [:button {:class "button"
                 :on-click #(rf/dispatch [:sign-out])}
        "Sign Out"]]
      [:span [:button {:on-click #(rf/dispatch [:sign-in])

@@ -13,6 +13,17 @@
    (:view db)))
 
 (rf/reg-sub
+ :user
+ (fn [db _] (:user db)))
+
+(rf/reg-sub
+ :logged-in?
+ (fn [_ _]
+   (rf/subscribe [:user]))
+ (fn [user _]
+   (boolean user)))
+
+(rf/reg-sub
  :game-code
  (fn [db]
    (:game-code db)))

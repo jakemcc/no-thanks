@@ -22,10 +22,6 @@
  (fn [db [_ error]]
    (assoc db :firebase-error (pr-str error))))
 
-(rf/reg-sub
- :user
- (fn [db _] (:user db)))
-
 ;; ^^^ re-frame-firebase stuff
 
 
