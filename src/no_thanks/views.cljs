@@ -8,6 +8,36 @@
 (defn listen [query]
   @(rf/subscribe [query]))
 
+(defn game-middle []
+  [:div
+   "Top card: " (listen :top-card)
+   [:br]
+   "Tokens on card: " (listen :token-pot)])
+
+(defn playing-players []
+  (let [user (listen :user)
+        players (listen :players)
+        indexed-players (->> (map-indexed vector players)
+                             cycle
+                             (drop-while (fn [[_ player]] (not= (:name player) (:email user))))
+                             (take (count players)))]
+    [:div
+     (doall (for [[idx player] indexed-players
+                  :let [is-viewing-user? (= (:name player) (:email user))
+                        players-turn? (= idx (listen :current-player))]]
+              [:div {:key idx
+                     :class (cond-> "player"
+                              players-turn? (str " playing"))}
+               [:div (str "----- " (:name player) " ------")]
+               [:div "Cards: " (string/join ", " (sort (:cards player)))]
+               (when is-viewing-user?
+                 [:div "Tokens: " (:tokens player)])
+               (when (and is-viewing-user? players-turn?)
+                 [:div
+                  [:button {:class "action-button" :on-click #(rf/dispatch [:take-card])}
+                   [:span "Take card"]]
+                  [:button {:class "action-button" :on-click #(rf/dispatch [:no-thanks!]) :disabled (zero? (:tokens player))}
+                   [:span "No thanks!"]]])]))]))
 
 (defn game []
   (condp = (listen :game-state)
@@ -20,33 +50,8 @@
            [:button {:on-click #(rf/dispatch [:play-another-round])} "Play another round"]
            [:button {:on-click #(rf/dispatch [:start-over])} "Start over"]]
     :playing [:div
-              [:div
-               "Top card: " (listen :top-card)
-               [:br]
-               "Tokens on card: " (listen :token-pot)]
-              (let [user (listen :user)
-                    players (listen :players)
-                    indexed-players (->> (map-indexed vector players)
-                                         cycle
-                                         (drop-while (fn [[_ player]] (not= (:name player) (:email user))))
-                                         (take (count players)))]
-                (doall (for [[idx player] indexed-players
-                             :let [is-viewing-user? (= (:name player) (:email user))
-                                   players-turn? (= idx (listen :current-player))]
-                             ]
-                         [:div {:key idx
-                                :class (cond-> "player"
-                                         players-turn? (str " playing"))}
-                          [:div (str "----- " (:name player) " ------")]
-                          [:div "Cards: " (string/join ", " (sort (:cards player)))]
-                          (when is-viewing-user?
-                            [:div "Tokens: " (:tokens player)])
-                          (when (and is-viewing-user? players-turn?)
-                            [:div
-                             [:button {:class "action-button" :on-click #(rf/dispatch [:take-card])}
-                              [:span "Take card"]]
-                             [:button {:class "action-button" :on-click #(rf/dispatch [:no-thanks!]) :disabled (zero? (:tokens player))}
-                              [:span "No thanks!"]]])])))]
+              [game-middle]
+              [playing-players]]
     :not-started (let [players (listen :players)]
                    [:div
                     [:div "---- Players ----"
