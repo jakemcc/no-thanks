@@ -8,6 +8,7 @@
 (defn listen [query]
   @(rf/subscribe [query]))
 
+
 (defn game []
   (condp = (listen :game-state)
     :over [:div "GAME OVER!"
@@ -23,17 +24,22 @@
                "Top card: " (listen :top-card)
                [:br]
                "Tokens on card: " (listen :token-pot)]
-              (let [current-user (listen :user)]
-                (doall (for [[idx player] (map-indexed vector (listen :players))
-                             :let [is-current-user? (= (:name player) (:email current-user))]]
+              (let [user (listen :user)
+                    players (listen :players)
+                    indexed-players (->> (map-indexed vector players)
+                                         cycle
+                                         (drop-while (fn [[_ player]] (not= (:name player) (:email user))))
+                                         (take (count players)))]
+                (doall (for [[idx player] indexed-players
+                             :let [is-current-user? (= (:name player) (:email user))]]
                          [:div {:key idx
                                 :class "player"}
                           [:div (str "----- " (:name player) " ------")]
                           [:div "Cards: " (string/join ", " (sort (:cards player)))]
                           (when is-current-user?
                             [:div "Tokens: " (:tokens player)])
-                          (when (and (= idx (listen :current-player))
-                                     is-current-user?)
+                          (when (and is-current-user?
+                                     (= idx (listen :current-player)))
                             [:div
                              [:button {:class "action-button" :on-click #(rf/dispatch [:take-card])}
                               [:span "Take card"]]
@@ -96,6 +102,6 @@
         (if (= :no-game view)
           [no-game]
           [game])))]
-   #_   (when config/debug?
-          [:pre {:class "database"}
-           (with-out-str (pprint/pprint @(rf/subscribe [:db])))])])
+   #_(when config/debug?
+       [:pre {:class "database"}
+        (with-out-str (pprint/pprint @(rf/subscribe [:db])))])])

@@ -6,9 +6,9 @@
 - [X] A person can only take actions for themselves
 - [X] Deploy
 - [X] only show your tokens  
-- [ ] Styling
+- [-] Styling
   - [ ] Highlight player who is taking action
-  - [ ] Put active player in same spot on screen all the time
+  - [X] Put active player in same spot on screen all the time
   - [ ] Add more whitespace
   - [ ] How's it look on phones?
 - [X] Display names instead of player #
