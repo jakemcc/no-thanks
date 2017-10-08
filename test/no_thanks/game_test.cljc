@@ -19,7 +19,8 @@
     (is (= 11 (-> game :players first :tokens)))
     (is (= [] (-> game :players first :cards)))
     (is (= (inc (- 35 3 9)) (count (:draw-pile game))))
-    (is (= 0 (:current-player game))))
+    (is (= 0 (:current-player game)))
+    (is (= 1 (:round-number game)) "First game is round number 1"))
 
   (let [game (game/initialize 6)]
     (is (= 6 (count (:players game))))
@@ -28,6 +29,13 @@
   (let [game (game/initialize 7)]
     (is (= 7 (count (:players game))))
     (is (= 7 (-> game :players first :tokens)))))
+
+(deftest test-starting-new-round
+  (let [first-game (game/initialize 5)
+        second-game (game/new-round first-game)]
+    (is (= 5 (count (:players second-game))))
+    (is (= 2 (:round-number second-game)) "Second game is round number 2")
+    (is (= 1 (:current-player second-game)) "Second game has second player start")))
 
 (deftest test-turn
   (testing "player takes a card"

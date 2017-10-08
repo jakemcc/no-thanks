@@ -12,6 +12,6 @@
   - [ ] Add more whitespace
   - [ ] How's it look on phones?
 - [X] Display names instead of player #
-- [ ] randomize starting player, or rotate based on game number or something  
+- [X] randomize starting player, or rotate based on game number or something  
 - [ ] Cap game at 7 players
 

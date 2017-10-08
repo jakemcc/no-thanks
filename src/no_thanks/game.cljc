@@ -1,5 +1,7 @@
 (ns no-thanks.game)
 
+(def safe+ (fnil + 0 0 0))
+
 (defn score-player [player]
   (- (loop [cards (sort (:cards player))
             current-run []
@@ -9,8 +11,8 @@
            (if (or (empty? current-run)
                    (= 1 (- card (last current-run))))
              (recur remaining-cards (conj current-run card) total)
-             (recur cards [] (+ total (first current-run)))))
-         (+ (first current-run) total)))
+             (recur cards [] (safe+ total (first current-run)))))
+         (safe+ (first current-run) total)))
      (:tokens player 0)))
 
 (defn initialize [number-players]
@@ -20,12 +22,18 @@
                           8 7)]
     {:draw-pile (drop 9 (shuffle (range 3 36)))
      :current-player 0
+     :round-number 1
      :game-over? false
      :players (vec (repeat number-players {:tokens starting-tokens :cards []}))}))
 
 (defn new-round [game]
-  (let [next-game (initialize (count (:players game)))]
+  (let [round-number (inc (:round-number game))
+        n-players (count (:players game))
+        starting-player (rem (dec round-number) n-players)
+        next-game (initialize n-players)]
     (-> next-game
+        (assoc :round-number round-number
+               :current-player starting-player)
         (update :players (fn [new-players]
                            (vec (for [[old-player new-player] (map vector (:players game) new-players)]
                                   (assoc new-player
