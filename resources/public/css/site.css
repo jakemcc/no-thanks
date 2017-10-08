@@ -1,5 +1,5 @@
 html {
-  font-size: 100%;
+  font-size: 110%;
 }
 
 body {
@@ -18,7 +18,7 @@ body {
 
 .header {
   margin-bottom: 18px;
-  padding: 0 1em;
+  padding: 0.2em 1em;
   border-bottom: solid 1px;
 }
 
@@ -48,14 +48,14 @@ button {
   cursor: pointer;
   position: relative;
 
-  margin-right: 2rem;
+  margin-right: 1.5rem;
   padding: 0;
 
   overflow: hidden;
 
   border-width: 0;
   outline: none;
-  border-radius: 2px;
+  border-radius: 1px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
 
   color: white;
