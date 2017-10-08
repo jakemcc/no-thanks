@@ -3,8 +3,7 @@ html {
 }
 
 body {
-  max-width: 400px;
-  /* width: 375px; */
+  max-width: 800px;
   postition: relative;
   margin: 0 auto;
   padding: 0;
@@ -49,7 +48,7 @@ button {
   cursor: pointer;
   position: relative;
 
-  margin-right: 5px;
+  margin-right: 2rem;
   padding: 0;
 
   overflow: hidden;
@@ -62,10 +61,6 @@ button {
   color: white;
   background-color: black;
   transition: background-color .3s;
-}
-
-.action-button > * {
-  position: relative;
 }
 
 .action-button > span {
