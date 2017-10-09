@@ -18,5 +18,5 @@
 - [ ] Allow users to put in own name and join anonymously
 - [ ] Some sort of remaining card indicator
 - [ ] Start game button not near take card button
-- [ ] Sort by who is winning on game over screen
-- [ ] Space between the buttons on game over screen
+- [X] Sort by who is winning on game over screen
+- [X] Space between the buttons on game over screen

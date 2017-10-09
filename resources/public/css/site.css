@@ -502,6 +502,18 @@ html {
 }
 
 
+.winner {
+  margin-bottom: 1.0em;
+}
+
+.winner-label {
+  margin-bottom: 0.5em;
+  display: block;
+  text-decoration: underline;
+}
+
+
+
 button {
   border: 1px;
   padding: 0.5em 1em;

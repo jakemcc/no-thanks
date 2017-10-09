@@ -39,14 +39,45 @@
                   [:button {:class "action-button" :on-click #(rf/dispatch [:no-thanks!]) :disabled (zero? (:tokens player))}
                    [:span "No thanks!"]]])]))]))
 
+(defn winner-box [label player-name score]
+  [:div {:class "winner"}
+   [:span {:class "winner-label"} label]
+   (str player-name " with " score)])
+
 (defn game []
   (condp = (listen :game-state)
-    :over [:div "GAME OVER!"
-           (doall
-            (for [[idx player] (map-indexed vector (listen :players))
-                  :let [rounds-score (game/score-player player)]]
-              [:div {:key idx}
-               (str (:name player) "'s round score: " rounds-score " total score: " (+ rounds-score (:total-score player)))]))
+    :over [:div
+           [:h2 "GAME OVER!"]
+           (let [players (listen :players)
+                 players (mapv (fn [player] (let [round-score (game/score-player player)]
+                                              (assoc player
+                                                     :round-score round-score
+                                                     :total-score (+ round-score (:total-score player)))))
+                               players)
+                 round-winner (first (sort-by :round-score players))
+                 overall-leader (first (sort-by :total-score players))]
+             [:div
+              [winner-box
+               "ROUND WINNER"
+               (:name round-winner)
+               (:round-score round-winner)]
+              [winner-box
+               "OVERALL LEADER"
+               (:name overall-leader)
+               (:total-score overall-leader)]
+              [:div {:class "winner"}
+               [:span {:class "winner-label"} "SCOREBOARD"]
+               [:table
+                [:thead
+                 [:tr [:th "Player"] [:th "Round"] [:th "Overall"]]]
+                (into [:tbody]
+                      (for [[idx player] (map-indexed vector
+                                                      (sort-by :round-score players))
+                            :let [{:keys [name round-score total-score]} player]]
+                        [:tr {:key idx}
+                         [:td name]
+                         [:td round-score]
+                         [:td total-score]]))]]])
            [:button {:on-click #(rf/dispatch [:play-another-round])
                      :class "action-button"}
             [:span "Play another round"]]
