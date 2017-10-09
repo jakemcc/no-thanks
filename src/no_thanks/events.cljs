@@ -56,16 +56,18 @@
                      :on-success #(println "join game success")
                      :on-failure [:firebase-error]}}))
 
-
-
 (defn game-event! [event f & args]
-  (rf/reg-event-fx
-   event
-   (fn [{:keys [db]} _]
-     {:firebase/swap! {:path [(keyword (:game-code db))]
-                       :function #(apply f % args)
-                       :on-success #(println (str event " success"))
-                       :on-failure [:firebase-error]}})))
+  (let [enabled? (atom true)]
+    (rf/reg-event-fx
+     event
+     (fn [{:keys [db]} _]
+       (js/setTimeout (fn [_] (compare-and-set! enabled? false true)) 300)
+       (if (compare-and-set! enabled? true false)
+         {:firebase/swap! {:path [(keyword (:game-code db))]
+                           :function #(apply f % args)
+                           :on-success #(println (str event " success"))
+                           :on-failure [:firebase-error]}}
+         {})))))
 
 (game-event! :start-over game/reset-and-keep-players)
 
