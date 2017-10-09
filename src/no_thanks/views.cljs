@@ -71,8 +71,9 @@
                 [:thead
                  [:tr [:th "Player"] [:th "Round"] [:th "Overall"]]]
                 (into [:tbody]
-                      (for [[idx player] (map-indexed vector
-                                                      (sort-by :round-score players))
+                      (for [[idx player] (->> players
+                                              (sort-by :round-score)
+                                              (map-indexed vector))
                             :let [{:keys [name round-score total-score]} player]]
                         [:tr {:key idx}
                          [:td name]
