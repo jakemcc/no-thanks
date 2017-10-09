@@ -17,6 +17,6 @@
 - [ ] Use URL to store game code (query param or route)
 - [ ] Allow users to put in own name and join anonymously
 - [ ] Some sort of remaining card indicator
-- [ ] Start game button not near take card button
+- [X] Start game button not near take card button
 - [X] Sort by who is winning on game over screen
 - [X] Space between the buttons on game over screen

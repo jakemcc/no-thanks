@@ -90,14 +90,14 @@
               [playing-players]]
     :not-started (let [players (listen :players)]
                    [:div
+                    [:button
+                     {:on-click #(rf/dispatch [:start-game])}
+                     "Start Game"]
                     [:div "---- Players ----"
                      [:div
                       (doall (for [[idx player] (map-indexed vector players)]
                                [:div {:key idx}
-                                (:name player)]))]]
-                    [:button
-                     {:on-click #(rf/dispatch [:start-game])}
-                     "Start Game"]])))
+                                (:name player)]))]]])))
 
 (defn no-game []
   [:div
