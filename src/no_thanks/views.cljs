@@ -28,7 +28,7 @@
               [:div {:key idx
                      :class (cond-> "player"
                               players-turn? (str " playing"))}
-               [:div (str "----- " (:name player) " ------")]
+               [:h2 {:class "player-title"} (:name player)]
                [:div "Cards: " (string/join ", " (sort (:cards player)))]
                (when is-viewing-user?
                  [:div "Tokens: " (:tokens player)])
