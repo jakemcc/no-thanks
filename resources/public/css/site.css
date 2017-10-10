@@ -501,7 +501,6 @@ html {
   color: blue;
 }
 
-
 .winner {
   margin-bottom: 1.0em;
 }
@@ -542,5 +541,6 @@ button {
 
 .action-button > span {
   display: block;
-  padding: 1em 2em;
+  padding: 1em 0;
+  /* padding: 1em 2em; */
 }

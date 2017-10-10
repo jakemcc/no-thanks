@@ -34,9 +34,15 @@
                  [:div "Tokens: " (:tokens player)])
                (when (and is-viewing-user? players-turn?)
                  [:div
-                  [:button {:class "action-button" :on-click #(rf/dispatch [:take-card])}
+                  [:button {:class "action-button"
+                            :style {:width "35%"}
+                            :on-click #(rf/dispatch [:take-card])}
                    [:span "Take card"]]
-                  [:button {:class "action-button" :on-click #(rf/dispatch [:no-thanks!]) :disabled (zero? (:tokens player))}
+                  [:span {:style {:display "inline-block"
+                                  :width "10%"}}]
+                  [:button {:class "action-button"
+                            :style {:width "35%"}
+                            :on-click #(rf/dispatch [:no-thanks!]) :disabled (zero? (:tokens player))}
                    [:span "No thanks!"]]])]))]))
 
 (defn winner-box [label player-name score]
