@@ -494,7 +494,7 @@ html {
 
 .player-title {
   text-decoration: underline;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
 }
 
 .playing {
@@ -511,8 +511,6 @@ html {
   display: block;
   text-decoration: underline;
 }
-
-
 
 button {
   border: 1px;
