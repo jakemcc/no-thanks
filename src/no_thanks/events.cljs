@@ -61,7 +61,7 @@
     (rf/reg-event-fx
      event
      (fn [{:keys [db]} _]
-       (js/setTimeout (fn [_] (compare-and-set! enabled? false true)) 300)
+       (js/setTimeout (fn [_] (compare-and-set! enabled? false true)) 500)
        (if (compare-and-set! enabled? true false)
          {:firebase/swap! {:path [(keyword (:game-code db))]
                            :function #(apply f % args)
