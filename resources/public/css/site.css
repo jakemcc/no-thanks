@@ -466,7 +466,7 @@ html {
 /* } */
 
 #app {
-  padding: 10px 15px;
+  padding: 10px 5px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -480,12 +480,12 @@ html {
 
 .header {
   margin-bottom: 18px;
-  padding: 0.2em 1em;
+  padding: 0.2em 0.1em;
   border-bottom: solid 1px;
 }
 
 .board {
-  margin: 0 2em;
+  margin: 0 0.1em;
 }
 
 .player {
