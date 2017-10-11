@@ -20,3 +20,9 @@
 - [X] Start game button not near take card button
 - [X] Sort by who is winning on game over screen
 - [X] Space between the buttons on game over screen
+- [ ] Button to end game and re-go to join screen
+- [ ] If a new player joins a game, reset scores
+- [ ] Ability to reset a room to empty state
+- [ ] BUG: User tries to rejoin game, sees no one in room, clicks
+  start and it restarts the game. (other players were playing, game
+  gets reset)
