@@ -2,11 +2,15 @@
   (:require [com.degel.re-frame-firebase :as firebase]
             [re-frame.core :as rf]
             [no-thanks.db :as db]
+            [no-thanks.config :as config]
             [no-thanks.game :as game]))
 
 (rf/reg-event-fx
  :sign-in
- (fn [_ _] {:firebase/google-sign-in {:sign-in-method :redirect}}))
+ (fn [_ _] {:firebase/google-sign-in {:sign-in-method
+                                      (if config/debug?
+                                        :popup
+                                        :redirect)}}))
 
 (rf/reg-event-fx
  :sign-out
