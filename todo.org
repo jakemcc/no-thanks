@@ -13,7 +13,7 @@
   - [ ] How's it look on phones?
 - [X] Display names instead of player #
 - [X] randomize starting player, or rotate based on game number or something  
-- [ ] Cap game at 7 players
+- [X] Cap game at 7 players (instead put it with no limit)
 - [ ] Use URL to store game code (query param or route)
 - [ ] Allow users to put in own name and join anonymously
 - [ ] Some sort of remaining card indicator
@@ -23,6 +23,7 @@
 - [ ] Button to end game and re-go to join screen
 - [ ] If a new player joins a game, reset scores
 - [ ] Ability to reset a room to empty state
+- [ ] See all players cards and tokens at end of game
 - [ ] BUG: User tries to rejoin game, sees no one in room, clicks
   start and it restarts the game. (other players were playing, game
   gets reset)
