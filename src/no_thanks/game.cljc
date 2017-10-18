@@ -16,10 +16,7 @@
      (:tokens player 0)))
 
 (defn initialize [number-players]
-  (let [starting-tokens (condp > number-players
-                          6 11
-                          7 9
-                          8 7)]
+  (let [starting-tokens (min (quot 55 number-players) 11)]
     {:draw-pile (drop 9 (shuffle (range 3 36)))
      :current-player 0
      :round-number 1

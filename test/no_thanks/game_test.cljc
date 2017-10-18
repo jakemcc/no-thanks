@@ -28,7 +28,11 @@
 
   (let [game (game/initialize 7)]
     (is (= 7 (count (:players game))))
-    (is (= 7 (-> game :players first :tokens)))))
+    (is (= 7 (-> game :players first :tokens))))
+
+  (let [game (game/initialize 8)]
+    (is (= 8 (count (:players game))))
+    (is (= 6 (-> game :players first :tokens)))))
 
 (deftest test-starting-new-round
   (let [first-game (game/initialize 5)
