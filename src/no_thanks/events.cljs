@@ -35,6 +35,18 @@
    db/default-db))
 
 (rf/reg-event-fx
+ :start-current-players-turn
+ (fn [_ _]
+   {:vibrate 100}))
+
+(rf/reg-fx
+ :vibrate
+ (fn [length]
+   (when js/navigator.vibrate
+     (js/console.log "Vibrate for" length)
+     (js/navigator.vibrate length))))
+
+(rf/reg-event-fx
  :create-game
  (fn [{:keys [db]} [_]]
    (let [code (apply str (repeatedly 4 #(rand-nth ["A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z"])))]

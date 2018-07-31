@@ -30,12 +30,19 @@
 
 (rf/reg-sub-raw
  :game
- (fn [db _]
-   (reaction
-    (let [game-code @(rf/subscribe [:game-code])]
-      (if game-code
-        @(rf/subscribe [:firebase/on-value {:path [game-code]}])
-        nil)))))
+ (fn [app-db _]
+   (let [previous-player (atom nil)]
+     (reaction
+      (let [game-code @(rf/subscribe [:game-code])]
+        (if game-code
+          (let [game @(rf/subscribe [:firebase/on-value {:path [game-code]}])
+                player (get-in game [:players (:current-player game) :name])]
+            (when (and (not= player @previous-player)
+                       (= player (get-in @app-db [:user :email])))
+              (rf/dispatch [:start-current-players-turn]))
+            (reset! previous-player player)
+            game)
+          nil))))))
 
 (rf/reg-sub
  :top-card
