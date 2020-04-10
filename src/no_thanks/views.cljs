@@ -97,7 +97,8 @@
     :not-started (let [players (listen :players)]
                    [:div
                     [:button
-                     {:on-click #(rf/dispatch [:start-game])}
+                     {:on-click #(rf/dispatch [:start-game])
+                      :class "button"}
                      "Start Game"]
                     [:div "---- Players ----"
                      [:div
@@ -116,9 +117,11 @@
              :name "game"
              :placeholder "Enter Game Code"
              :required true}]
-    [:button {:type "submit"} "Join Game"]]
+    [:button {:type "submit" :class "button ml3"} "Join Game"]]
    [:br]
-   [:button {:on-click #(rf/dispatch [:create-game])} "Create new game"]])
+   [:button {:on-click #(rf/dispatch [:create-game])
+             :class "button"}
+    "Create new game"]])
 
 (defn header []
   [:div {:class "header"}

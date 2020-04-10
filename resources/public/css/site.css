@@ -518,6 +518,12 @@ button {
 
 .button {
   cursor: pointer;
+  border-radius: 5px;
+  background-color: lightgray;
+}
+
+.ml3 {
+    margin-left: 1em;
 }
 
 .action-button {
