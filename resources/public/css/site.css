@@ -526,6 +526,10 @@ button {
     margin-left: 1em;
 }
 
+.mt3 {
+    margin-top: 1em;
+}
+
 .action-button {
   cursor: pointer;
   position: relative;

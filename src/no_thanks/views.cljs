@@ -117,7 +117,7 @@
              :name "game"
              :placeholder "Enter Game Code"
              :required true}]
-    [:button {:type "submit" :class "button ml3"} "Join Game"]]
+    [:button {:type "submit" :class "button ml3 mt3"} "Join Game"]]
    [:br]
    [:button {:on-click #(rf/dispatch [:create-game])
              :class "button"}
