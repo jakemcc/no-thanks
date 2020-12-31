@@ -11,3 +11,6 @@ pom.xml.asc
 .hg/
 resources/public/js/compiled
 figwheel_server.log
+
+# Firebase cache
+.firebase/
