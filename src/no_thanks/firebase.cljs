@@ -1,10 +1,10 @@
 (ns no-thanks.firebase
   (:require clojure.walk
-            com.degel.re-frame-firebase.core
+            com.degel.re-frame-firebase.database
             [re-frame.core :as rf]
-            [sodium.re-utils :as re-utils]))
+            [iron.re-utils :as re-utils]))
 
-(def fb-ref #'com.degel.re-frame-firebase.core/fb-ref)
+(def fb-ref #'com.degel.re-frame-firebase.database/fb-ref)
 
 (defn success-failure-wrapper [on-success on-failure]
   (let [on-success (and on-success (re-utils/event->fn on-success))

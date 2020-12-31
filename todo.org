@@ -2,6 +2,7 @@
 - [X] can rejoin game as same account
 - [X] can go back to people joining game view
 - [X] sign out
+- [ ] Signing out should do something better about showing game state?
 - [X] Display game code in header
 - [X] A person can only take actions for themselves
 - [X] Deploy

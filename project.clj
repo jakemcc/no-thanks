@@ -2,8 +2,8 @@
   :dependencies [[org.clojure/clojure "1.9.0-beta1"]
                  [org.clojure/clojurescript "1.9.946"]
                  [re-frame "0.10.2"]
-                 [cljsjs/firebase "4.4.0-0"]
-                 [com.degel/re-frame-firebase "0.2.0"]]
+                 [cljsjs/firebase "7.5.0-0"]
+                 [com.degel/re-frame-firebase "0.8.0"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]]
 

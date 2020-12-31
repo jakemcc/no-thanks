@@ -11,7 +11,8 @@
 (enable-console-print!)
 
 (defonce firebase-app-info
-  {:apiKey "AIzaSyAkUjSD5ogB2Lw-YofUxSmAANlERRtsg4I"
+  {:projectId "no-thanks"
+   :apiKey "AIzaSyAkUjSD5ogB2Lw-YofUxSmAANlERRtsg4I"
    :authDomain "no-thanks.firebaseapp.com"
    :databaseURL "https://no-thanks.firebaseio.com"
    :storageBucket "no-thanks.appspot.com"})
